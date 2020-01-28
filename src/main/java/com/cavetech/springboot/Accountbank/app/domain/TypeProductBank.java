@@ -14,10 +14,14 @@ public @Data class TypeProductBank {
 	@Id
 	private String id;
 	private String description;
-	public TypeProductBank(String description) {
-		
+	private Integer valtip;
+	
+	public TypeProductBank(String description, Integer valtip) {
+		super();
 		this.description = description;
+		this.valtip = valtip;
 	}
+	
 
 	
 	

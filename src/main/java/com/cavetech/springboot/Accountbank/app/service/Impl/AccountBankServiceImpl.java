@@ -24,25 +24,46 @@ public class AccountBankServiceImpl implements AccountBankService{
 	//registro de cuentas bancarias 
 	@Override
 	public Mono<AccountBank> save(AccountBank accountBank) {
-					return WebClient.builder().baseUrl("http://localhost:8083/client/").build().get()
+					return WebClient.builder().baseUrl("http://localhost:8009/client/client/").build().get()
 				.uri(accountBank.getClient().getId()).retrieve().bodyToMono(Client.class).log()
 				.flatMap(cl -> {
 					accountBank.setClient(cl);
-					return WebClient.builder().baseUrl("http://localhost:8081/productbank/").build().get()
+					return WebClient.builder().baseUrl("http://localhost:8009/productbank/productbank/").build().get()
 							.uri(accountBank.getProduct().getId()).retrieve()
 							.bodyToMono(ProductBank.class).log();
 				})
+				.flatMap(sa -> {
+					accountBank.setProduct(sa);
+				return	ValidCant(accountBank).count();
+					
+				})
 				
-				
-				.flatMap(acc -> { 
-					accountBank.setProduct(acc);
-					System.out.println(accountBank);
+				.flatMap(count -> { 
+					
+					if(accountBank.getClient().getType().getValtip()==1) { 
+						
+					if( accountBank.getProduct().getCodigo()==1 || 
+							accountBank.getProduct().getCodigo()==2 ||
+							accountBank.getProduct().getCodigo()==3) {
+						if(count > 0) {
+							
+							return null;
+		
+						}
+						return accbankrep.save(accountBank);
+						
+					}	
+						
+					}
 					return accbankrep.save(accountBank);
+				
 				});
 	}
 
 	
-	
+	public Flux<AccountBank> ValidCant(AccountBank acc) {
+return accbankrep.buscarPorCodigoTipoClienteIdTipoProducto(acc.getClient().getId(), acc.getClient().getType().getValtip(), acc.getProduct().getTypeProductBank().getValtip());
+	}
 	
 	
 	@Override

@@ -1,0 +1,1 @@
+spring:  application:    name: account_bank   cloud:    config:      uri:       - http://localhost:9999

@@ -22,6 +22,7 @@ public  @Data   class Client {
 	private String lastName;
 	private boolean state ;
 	private TypeClient type;
+
 	public Client(String dni, String firstName, String lastName, boolean state, TypeClient type) {
 		super();
 		this.dni = dni;
@@ -29,7 +30,9 @@ public  @Data   class Client {
 		this.lastName = lastName;
 		this.state = state;
 		this.type = type;
+		
 	}
+	
 	
 	
 }
