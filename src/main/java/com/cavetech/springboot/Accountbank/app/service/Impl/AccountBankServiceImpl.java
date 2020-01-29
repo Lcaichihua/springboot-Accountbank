@@ -39,20 +39,38 @@ public class AccountBankServiceImpl implements AccountBankService{
 				})
 				
 				.flatMap(count -> { 
-					
+					//valida tipo Cliente uno
 					if(accountBank.getClient().getType().getValtip()==1) { 
-						
+						System.out.println("el codigo es ");
+						System.out.println(count);
 					if( accountBank.getProduct().getCodigo()==1 || 
 							accountBank.getProduct().getCodigo()==2 ||
 							accountBank.getProduct().getCodigo()==3) {
 						if(count > 0) {
 							
-							return null;
+							String error = "el cliente ya cuenta con una cuenta tipo "+
+							accountBank.getProduct().getDescription() ;
+							return Mono.error(new InterruptedException(error));
 		
 						}
 						return accbankrep.save(accountBank);
 						
-					}	
+					}
+					String error = "el cliente debe no puede tener asignado este producto "+
+							accountBank.getProduct().getDescription() ;
+							return Mono.error(new InterruptedException(error));
+						
+							// valida tipo Cliente uno
+					} else if (accountBank.getClient().getType().getValtip()==2) {
+						if(accountBank.getProduct().getCodigo()==1 || 
+								accountBank.getProduct().getCodigo()==3  ) {
+							String error = "el cliente no puede acceder a estos productos "+
+									accountBank.getProduct().getDescription() ;
+									return Mono.error(new InterruptedException(error));
+							
+						}else if(accountBank.getProduct().getCodigo()==2 ) {
+							return accbankrep.save(accountBank);
+						}
 						
 					}
 					return accbankrep.save(accountBank);
@@ -62,9 +80,10 @@ public class AccountBankServiceImpl implements AccountBankService{
 
 	
 	public Flux<AccountBank> ValidCant(AccountBank acc) {
-return accbankrep.buscarPorCodigoTipoClienteIdTipoProducto(acc.getClient().getId(), acc.getClient().getType().getValtip(), acc.getProduct().getTypeProductBank().getValtip());
-	}
-	
+return accbankrep.buscarPorCodigoTipoClienteIdTipoProducto(acc.getClient().getId(),
+acc.getClient().getType().getValtip(), acc.getProduct().getCodigo());
+	}		
+
 	
 	@Override
 	public Flux<AccountBank> findAll() {
