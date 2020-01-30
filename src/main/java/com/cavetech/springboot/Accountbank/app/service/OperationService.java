@@ -7,5 +7,6 @@ import reactor.core.publisher.Mono;
 
 public interface OperationService {
 
-	public Mono<Transactions> ActionAccountBank (OperationDto dto);
+	public Mono<Transactions> retirement (OperationDto dto);
+	public Mono<Transactions> deposit (OperationDto dto);
 }

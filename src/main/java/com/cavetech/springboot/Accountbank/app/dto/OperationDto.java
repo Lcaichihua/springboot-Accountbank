@@ -5,11 +5,11 @@ import javax.validation.constraints.NotNull;
 
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import com.cavetech.springboot.Accountbank.app.domain.ActionAccount;
-
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class OperationDto {
@@ -21,8 +21,6 @@ public class OperationDto {
 	private String accountDest;
 
 	private String cci;
-
-	private ActionAccount action;
 	
 	@NotNull
 	private double amount;

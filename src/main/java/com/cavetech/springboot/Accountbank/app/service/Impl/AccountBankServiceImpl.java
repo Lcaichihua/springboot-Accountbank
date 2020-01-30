@@ -80,7 +80,7 @@ public class AccountBankServiceImpl implements AccountBankService{
 
 	
 	public Flux<AccountBank> ValidCant(AccountBank acc) {
-return accbankrep.buscarPorCodigoTipoClienteIdTipoProducto(acc.getClient().getId(),
+return accbankrep.findQuery(acc.getClient().getId(),
 acc.getClient().getType().getValtip(), acc.getProduct().getCodigo());
 	}		
 

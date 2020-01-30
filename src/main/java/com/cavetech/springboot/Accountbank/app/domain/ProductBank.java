@@ -15,8 +15,8 @@ public  @Data  class ProductBank {
 	private String id;
 	private String description;
 	private TypeProductBank typeProductBank;
-	private int codigo;
-	public ProductBank(String description, TypeProductBank typeProductBank, int codigo) {
+	private Integer codigo;
+	public ProductBank(String description, TypeProductBank typeProductBank, Integer codigo) {
 		super();
 		this.description = description;
 		this.typeProductBank = typeProductBank;
