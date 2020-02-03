@@ -1,4 +1,4 @@
-package com.cavetech.springboot.Accountbank.app;
+package com.cavetech.springboot.Accountbank.app.Swagger;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import springfox.documentation.service.ApiInfo;

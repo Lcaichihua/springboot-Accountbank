@@ -30,7 +30,7 @@ public class TransactionController {
 	@PostMapping(value = "/retirement")
 	public Mono<Transactions> retirement(@RequestBody @Valid OperationDto dto){
 		
-		return operation.deposit(dto);
+		return operation.retirement(dto);
 	}
 
 }

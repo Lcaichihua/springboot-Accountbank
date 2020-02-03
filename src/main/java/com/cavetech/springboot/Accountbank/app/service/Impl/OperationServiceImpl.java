@@ -23,12 +23,17 @@ public class OperationServiceImpl implements OperationService {
 
 	@Override
 	public Mono<Transactions> retirement(OperationDto dto) {
-		System.out.println("1 - Retiro");
+		System.out.println("2 - Retiro");
 		
-		return accrepo.findByNumcount(dto.getAccountDest()).flatMap(account -> {
-		
-			account.setBalance(account.getBalance() - dto.getAmount());
-			return accrepo.save(account);	
+		return accrepo.findByNumcount(dto.getAccountOrig()).flatMap(account -> {
+			
+			if((account.getBalance()-dto.getAmount()) >=0) {
+				account.setBalance(account.getBalance() - dto.getAmount());
+				return accrepo.save(account);
+				
+			}
+
+			return Mono.error(new InterruptedException(" monto del retiro excede el saldo actual"));
 		}).flatMap(account -> {
 
 			Transactions tran = new Transactions(dto.getAccountOrig(), account.getNumcount(), "2 ", new Date(),
@@ -42,10 +47,24 @@ public class OperationServiceImpl implements OperationService {
 	public Mono<Transactions> deposit(OperationDto dto) {
 		
 		System.out.println("1 - Deposito");
-		return accrepo.findByNumcount(dto.getAccountDest()).flatMap(account -> {
+		return accrepo.findByNumcount(dto.getAccountOrig()).flatMap(account -> {
+			if((account.getBalance()-dto.getAmount()) < 0) {
+				return Mono.error(new InterruptedException(" monto del deposito excede el saldo"));
+			}	
+			account.setBalance(account.getBalance() - dto.getAmount());
+			return accrepo.save(account);
+
+			
+		}).flatMap(acc ->{
+		return accrepo.findByNumcount(dto.getAccountDest());
+		}) 
+		
+		
+		.flatMap(account -> {
 		
 			account.setBalance(account.getBalance() + dto.getAmount());
-			return accrepo.save(account);	
+			return accrepo.save(account);
+
 		}).flatMap(account -> {
 
 			Transactions tran = new Transactions(dto.getAccountOrig(), account.getNumcount(), "1 ", new Date(),
