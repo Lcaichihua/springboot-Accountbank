@@ -1,1 +1,1 @@
-spring:  application:    name: account_bank   cloud:    config:      uri:       - http://localhost:9999
+spring:  application:    name: account_bank     cloud:    config:      uri:       - http://localhost:9999       hystrix.command.default.execution.isolation.thread.timeoutInMilliseconds: 20000ribbon.ConnectTimeout: 3000ribbon.ReadTimeout: 10000

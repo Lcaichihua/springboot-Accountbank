@@ -18,5 +18,8 @@ public interface AccountBankRepository extends ReactiveMongoRepository<AccountBa
 	@Query("{'client.id' : ?0 , 'client.type.valtip' : ?1 , 'product.codigo' : ?2}")	
 	public Flux<AccountBank> findQuery(String idCliente, Integer codigoTipoCliente, Integer idTipoProducto);
 
-	public Mono<AccountBank> findByNumcount( String numcount);
-}
+	//falta completar el comando necearppip
+	public Mono<AccountBank> findByClient( String idClient);																																																																																																
+	
+	
+} 

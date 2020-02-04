@@ -6,9 +6,10 @@ import com.cavetech.springboot.Accountbank.app.dto.OperationDto;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-public interface OperationService {
+public interface TransactionsService {
 
-	public Mono<Transactions> retirement (OperationDto dto);
-	public Mono<Transactions> deposit (OperationDto dto);
+
+	public Flux<Transactions> ListMovements(String idClient);
+
 	
 }

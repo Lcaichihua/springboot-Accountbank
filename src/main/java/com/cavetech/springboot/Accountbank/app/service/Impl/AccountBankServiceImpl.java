@@ -7,6 +7,7 @@ import org.springframework.web.reactive.function.client.WebClient;
 import com.cavetech.springboot.Accountbank.app.domain.AccountBank;
 import com.cavetech.springboot.Accountbank.app.domain.Client;
 import com.cavetech.springboot.Accountbank.app.domain.ProductBank;
+import com.cavetech.springboot.Accountbank.app.dto.ReportBalance;
 import com.cavetech.springboot.Accountbank.app.repository.AccountBankRepository;
 import com.cavetech.springboot.Accountbank.app.service.AccountBankService;
 
@@ -103,6 +104,14 @@ acc.getClient().getType().getValtip(), acc.getProduct().getCodigo());
 	@Override
 	public Mono<Void> delete(AccountBank accountBank) {
 		return this.accbankrep.delete(accountBank);
+	}
+
+//implmentr logica aca
+	
+	@Override
+	public Flux<ReportBalance> reportBalance(String idCliente) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	/*@Override
