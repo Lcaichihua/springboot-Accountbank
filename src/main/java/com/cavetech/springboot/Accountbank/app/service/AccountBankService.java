@@ -23,5 +23,5 @@ public interface AccountBankService {
 
 	Mono<Void> delete(AccountBank accountBank);
 	
-    Flux<ReportBalance> reportBalance(String idCliente) ;
+	 Flux<ReportBalance> reportSaldo(String idCliente);
 }

@@ -5,8 +5,7 @@ import org.springframework.data.mongodb.repository.ReactiveMongoRepository;
 import org.springframework.stereotype.Repository;
 
 import com.cavetech.springboot.Accountbank.app.domain.AccountBank;
-
-
+import com.cavetech.springboot.Accountbank.app.domain.Client;
 
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -18,8 +17,11 @@ public interface AccountBankRepository extends ReactiveMongoRepository<AccountBa
 	@Query("{'client.id' : ?0 , 'client.type.valtip' : ?1 , 'product.codigo' : ?2}")	
 	public Flux<AccountBank> findQuery(String idCliente, Integer codigoTipoCliente, Integer idTipoProducto);
 
-	//falta completar el comando necearppip
-	public Mono<AccountBank> findByClient( String idClient);																																																																																																
+
+	public Flux<AccountBank> findByClient( Client client);	
+	
+	
+	public Mono<AccountBank> findByNumcount( String numcount);
 	
 	
 } 

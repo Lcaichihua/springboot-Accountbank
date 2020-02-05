@@ -20,7 +20,7 @@ import lombok.NoArgsConstructor;
 public class Transactions {
 	@Id
 	private String id;
-
+	private AccountBank account ;
 	@NotEmpty(message = "El numero de cuenta origen no puede ser nulo o estar en blanco")
 	private String accountOrig;
 	@NotEmpty(message = "El numero de cuenta Destino no puede ser nulo o estar en blanco")
@@ -89,17 +89,28 @@ public class Transactions {
 		DateIns = dateIns;
 	}
 
-	public Transactions(
+	public Transactions(AccountBank account,
 			@NotEmpty(message = "El numero de cuenta origen no puede ser nulo o estar en blanco") String accountOrig,
 			@NotEmpty(message = "El numero de cuenta Destino no puede ser nulo o estar en blanco") String accountDest,
 			String action, @NotEmpty Date dateIns, @NotNull double amount) {
 		super();
+		this.account = account;
 		this.accountOrig = accountOrig;
 		this.accountDest = accountDest;
 		this.action = action;
 		DateIns = dateIns;
 		this.amount = amount;
 	}
+
+	public AccountBank getAccount() {
+		return account;
+	}
+
+	public void setAccount(AccountBank account) {
+		this.account = account;
+	}
+
+
 	
 	
 	

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cavetech.springboot.Accountbank.app.domain.AccountBank;
+import com.cavetech.springboot.Accountbank.app.dto.ReportBalance;
 import com.cavetech.springboot.Accountbank.app.service.AccountBankService;
 
 import io.swagger.annotations.ApiOperation;
@@ -51,6 +52,12 @@ public class AccountBankController {
 		return AccountBankServ.findAll();
 	}
 	
+	
+	@GetMapping("/reporte/{idCliente}")
+	@ApiOperation(value = "List balanace for client", notes="Generate balance by id Cliente ")
+	public Flux<ReportBalance> reporteProductosSaldo(@PathVariable String idClient) {
+		return AccountBankServ.reportSaldo(idClient);
+	}
 	
 	
 	

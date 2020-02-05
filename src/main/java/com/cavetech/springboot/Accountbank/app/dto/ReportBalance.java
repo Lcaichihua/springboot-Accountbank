@@ -13,10 +13,7 @@ public class ReportBalance {
 
 	private String  idAccount ;
 	private Double saldo;
-	public ReportBalance(Double saldo) {
-		super();
-		this.saldo = saldo;
-	}
+
 	
 	
 }

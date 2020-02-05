@@ -30,7 +30,8 @@ public class TransactionServiceImpl implements TransactionsService{
 					return Flux.just(c);
 				})	
 				.flatMap(c -> {
-					return tranrepo.buscarPorIdCliente(c.getId());
+					return tranrepo.ListtransactionforClient(c.getId());
+					
 				});
 	}
 

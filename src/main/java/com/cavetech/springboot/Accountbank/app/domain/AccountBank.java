@@ -24,7 +24,7 @@ private String id;
 private String numcount = UUID.randomUUID().toString();
 private Client client;
 private ProductBank product ;
-private double balance;
+private double balance = 0.00;
 private boolean state;
 
 public AccountBank(Client client, ProductBank product, double balance, boolean state) {
